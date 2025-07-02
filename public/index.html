@@ -47,11 +47,12 @@
             font-size: 1.5rem;
             animation: float 6s infinite linear;
             opacity: 0.7;
+              animation-fill-mode: backwards;
         }
 
         @keyframes float {
             0% {
-                transform: translateY(100vh) rotate(0deg);
+                transform: translateY(-10vh) rotate(0deg);
                 opacity: 0;
             }
             10% {
@@ -61,7 +62,7 @@
                 opacity: 0.7;
             }
             100% {
-                transform: translateY(-100px) rotate(360deg);
+                transform: translateY(1000px) rotate(360deg);
                 opacity: 0;
             }
         }
@@ -524,20 +525,6 @@
         </div>
     </section>
 
-    <!-- Social Proof Section -->
-    <section class="social-proof">
-        <div class="container">
-            <h2 class="section-title">Join 27+ Beta Testers Who Are Already Speaking</h2>
-            <div class="testimonial">
-                Finally, a way to practice speaking without embarrassment! The dating scenarios make me actually want to practice every day.
-                <div style="margin-top: 1rem; font-weight: 600; color: var(--primary-color);">- Elena, Exchange Student</div>
-            </div>
-            <p style="margin-top: 2rem; font-size: 1.1rem; color: var(--primary-color); font-weight: 600;">
-                80% of our beta testers said LoveLingo gave them more speaking confidence in just 2 weeks
-            </p>
-        </div>
-    </section>
-
     <!-- Waitlist Form -->
     <section class="waitlist" id="waitlist">
         <div class="container">
@@ -582,7 +569,7 @@
                             <option value="pronunciation">Pronunciation</option>
                         </select>
                     </div>
-                    <button type="submit" class="submit-btn">Secure My Early Access 🚀</button>
+                    <button id="submit-btn" type="submit" class="submit-btn">Secure My Early Access 🚀</button>
                 </form>
             </div>
         </div>
@@ -593,26 +580,28 @@
         <div class="container">
             <h2 class="section-title">Early Access Perks</h2>
             <div class="perks">
-                <div class="perk">
-                    <i class="fas fa-gift"></i>
-                    <h3>Free Premium Pack</h3>
-                    <p>Exclusive storyline worth $9.99</p>
-                </div>
+             
                 <div class="perk">
                     <i class="fas fa-crown"></i>
                     <h3>Founder's Badge</h3>
                     <p>Special status in your profile</p>
+                </div>
+                   <div class="perk">
+                    <i class="fas fa-gift"></i>
+                    <h3>Free Premium Pack</h3>
+                    <p>Exclusive storyline worth $9.99</p>
+                </div>
+                       <div class="perk">
+                    <i class="fas fa-users"></i>
+                    <h3>Direct Access</h3>
+                    <p>Chat directly with our team</p>
                 </div>
                 <div class="perk">
                     <i class="fas fa-tshirt"></i>
                     <h3>Exclusive Outfits</h3>
                     <p>Unique character customizations</p>
                 </div>
-                <div class="perk">
-                    <i class="fas fa-users"></i>
-                    <h3>Direct Access</h3>
-                    <p>Chat directly with our team</p>
-                </div>
+         
             </div>
             <p style="text-align: center; margin-top: 2rem; font-size: 1.1rem; color: var(--primary-color); font-weight: 600;">
                 Limited Beta Spots Available - Secure Yours Now!
@@ -625,12 +614,6 @@
         <div class="container">
             <h3>Built by Language Learners, For Language Learners</h3>
             <p>We're AI students who've struggled to speak at visa offices, failed to flirt in foreign countries, and felt the frustration of textbook learning. We're building the tool we wished existed.</p>
-            <div class="social-links">
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-tiktok"></i></a>
-                <a href="#"><i class="fab fa-discord"></i></a>
-            </div>
             <p style="margin-top: 2rem; opacity: 0.7;">© 2025 LoveLingo. Made with 💕 for language lovers.</p>
         </div>
     </footer>
@@ -653,11 +636,19 @@
     </div>
 
     <script>
-        document.getElementById("close-modal").addEventListener((event)=> {
-            //closeModal()
-            //open a link in a new tab
-            window.location = "https://lovelingo-chat.leanderziehm.com/"
-        })
+
+     // document.getElementById("close-modal").addEventListener()  //document.
+ //       document.getElementById("close-modal").addEventListener((event,g)=> {
+      
+   //         console.log("window location")
+     //       window.location = "https://lovelingo-chat.leanderziehm.com/"
+       // })
+document.getElementById("close-modal").addEventListener("click", (event) => {
+    console.log("window location");
+    window.location = "https://lovelingo-chat.leanderziehm.com/";
+});
+
+
         // onclick="closeModal()
         // Particle Animation
         function createParticle() {
@@ -679,7 +670,7 @@
         setInterval(createParticle, 2000);
 
         // Form submission
-        document.getElementById('waitlistForm').addEventListener('submit', function(e) {
+ /*       document.getElementById('waitlistForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
             // Here you would normally send the data to your backend
@@ -693,7 +684,45 @@
             
             // Reset form
             this.reset();
+        }); */
+
+   
+document.getElementById('waitlistForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const formData = new FormData(this);
+    const data = Object.fromEntries(formData);
+    console.log("submited form data",data)
+
+    try {
+        const response = await fetch('/api/waitlist', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
         });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            console.log("ok")
+            // Show thank you modal
+            document.getElementById('thankYouModal').style.display = 'flex';
+            this.reset();
+        } else {
+            // Handle validation or conflict error
+            alert(result.message || 'Submission failed. Please try again.');
+        }
+
+    } catch (error) {
+        console.error('Error submitting form:', error);
+        alert('Something went wrong. Please try again.');
+    }
+});
+
+
+
 
         function closeModal() {
             document.getElementById('thankYouModal').style.display = 'none';
