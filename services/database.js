@@ -9,7 +9,17 @@ if (!supabaseUrl || !supabaseKey) {
 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
+
 class DatabaseService {
+
+  async simple(){
+    const { data, error } = await supabase
+  .from('characwaitlistters')
+  .select();
+  console.log('Data:', data);
+  console.error('Error:', error);
+  }
+
   async createWaitlistEntry(data) {
     try {
       const { data: result, error } = await supabase
@@ -78,10 +88,11 @@ class DatabaseService {
 
   async getLanguageStats() {
     try {
-      const { data, error } = await supabase
-        .from('waitlist')
-        .select('language')
-        .not('language', 'is', null);
+    const { data, error } = await supabase
+  .from('waitlist')
+  .not('language', 'is', null)
+  .select('language');
+
 
       if (error) {
         throw new Error(`Database error: ${error.message}`);
@@ -101,3 +112,5 @@ class DatabaseService {
 }
 
 module.exports = new DatabaseService();
+
+

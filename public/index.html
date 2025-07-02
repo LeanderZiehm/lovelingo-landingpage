@@ -646,11 +646,19 @@
                 <li>Follow us on social media</li>
                 <li>Share with friends to move up the waitlist</li>
             </ul>
-            <button class="close-modal" onclick="closeModal()">Start the Romance! 🚀</button>
+            <button id="close-modal" class="close-modal"">Start the Romance! 🚀</button>
+         
+
         </div>
     </div>
 
     <script>
+        document.getElementById("close-modal").addEventListener((event)=> {
+            //closeModal()
+            //open a link in a new tab
+            window.location = "https://lovelingo-chat.leanderziehm.com/"
+        })
+        // onclick="closeModal()
         // Particle Animation
         function createParticle() {
             const particle = document.createElement('div');
