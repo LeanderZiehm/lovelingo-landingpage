@@ -9,8 +9,8 @@ const waitlistRoutes = require('./routes/waitlist');
 const { errorHandler, notFound } = require('./middleware/errorHandler');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
-
+const PORT = process.env.PORT || 3001;
+app.use(express.static(path.join(__dirname, 'public')));
 // Security middleware
 app.use(helmet({
   contentSecurityPolicy: {
