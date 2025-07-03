@@ -131,33 +131,15 @@
             right: 10%;
             width: 100px;
             height: 100px;
-            animation: heartbeat 2s infinite;
+            animation: heartbeat 3s infinite;
         }
-
-        .heart::before,
-        .heart::after {
-            content: '';
-            width: 52px;
-            height: 80px;
-            position: absolute;
-            left: 50px;
-            top: 0;
-            background: var(--light-color);
-            border-radius: 50px 50px 0 0;
-            transform: rotate(-45deg);
-            transform-origin: 0 100%;
-        }
-
-        .heart::after {
-            left: 0;
-            transform: rotate(45deg);
-            transform-origin: 100% 100%;
-        }
-
-        @keyframes heartbeat {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
+   @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    14%      { transform: scale(1.3); }
+    28%      { transform: scale(1); }
+    42%      { transform: scale(1.5); }
+    70%      { transform: scale(1); }
+}
 
         @keyframes fadeInUp {
             from {
@@ -459,9 +441,14 @@
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="heart"></div>
+        <!-- <div class="heart"></div> -->
+           <img  class="heart" src="apple-touch-icon.png " alt="heart" style="display: inline-block;">
+
         <div class="hero-content">
             <h1>Fall in Love with Learning Languages</h1>
+            <!-- apple-touch-icon.png -->
+           
+
             <p>Join the waitlist for LoveLingo - the romance game that makes you fluent through dating, adventures, and real conversations. Get early access and shape the future of language learning!</p>
             <a href="#waitlist" class="hero-cta">Start Your Love Story 💕</a>
         </div>
@@ -474,7 +461,7 @@
             <div class="pain-points">
                 <div class="pain-point">
                     <i class="fas fa-sad-tear"></i>
-                    <h3>3 years of Spanish class, still can't order coffee</h3>
+                    <h3>3 years of German classes, still can't order coffee</h3>
                     <p>Traditional methods focus on grammar drills instead of real conversation skills</p>
                 </div>
                 <div class="pain-point">
@@ -576,6 +563,10 @@
         </div>
     </section>
 
+ <div style="text-align: center;">
+  <img src="qrcode.png" alt="QR Code" style="display: inline-block; max-width: 800px; width: 100%; height: auto;">
+</div>
+  
     <!-- Incentives Section -->
     <section class="incentives">
         <div class="container">
