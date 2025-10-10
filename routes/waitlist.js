@@ -1,3 +1,5 @@
+/*
+
 const express = require('express');
 const Joi = require('joi');
 const databaseService = require('../services/database');
@@ -107,3 +109,4 @@ router.get('/stats', async (req, res) => {
 });
 
 module.exports = router;
+*/
